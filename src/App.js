@@ -1,11 +1,15 @@
-import logo from './logo.svg';
- 
-
+import Sidebar from "./Component/Sidebar/Sidebar";
+import Header from "./Component/Header/Header";
+import './App.css'
 function App() {
   return (
-    <div >
-      <h1>DAniel TEhrani</h1>
-    </div>
+    <>
+      <Sidebar />
+      <div className="main">
+       <Header />
+       {/* Router */}
+      </div>
+    </>
   );
 }
 
