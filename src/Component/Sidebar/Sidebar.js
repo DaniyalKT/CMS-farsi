@@ -6,6 +6,7 @@ import { BiCommentDetail } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { FaDollarSign } from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -14,37 +15,40 @@ export default function Sidebar() {
 
       <ul className="sidebar-links">
         <li>
-          <a href="#">
+          <NavLink to="/">
             <AiOutlineHome className="sidebar-icone" />
             صفحه اصلی
-          </a>
+          </NavLink>
         </li>
         <li className="active">
-          <a href="#">
-            <MdOutlineProductionQuantityLimits  className="sidebar-icone"/>
+          <NavLink to="/products">
+            <MdOutlineProductionQuantityLimits className="sidebar-icone" />
             محصولات
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="#">
+          <NavLink to="comments">
             <BiCommentDetail className="sidebar-icone" />
             کامنت ها
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="#">
-            <FiUsers className="sidebar-icone"/>
-            کاربران</a>
+          <NavLink to="/users">
+            <FiUsers className="sidebar-icone" />
+            کاربران
+          </NavLink>
         </li>
         <li>
-          <a href="#">
+          <NavLink to="/orders">
             <IoBagCheckOutline className="sidebar-icone" />
-            سفارشات</a>
+            سفارشات
+          </NavLink>
         </li>
         <li>
-          <a href="#">
+          <NavLink to="/offs">
             <FaDollarSign className="sidebar-icone" />
-            تخفیف ها</a>
+            تخفیف ها
+          </NavLink>
         </li>
       </ul>
     </div>
