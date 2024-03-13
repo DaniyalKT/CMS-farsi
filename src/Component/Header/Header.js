@@ -1,7 +1,7 @@
+import { MdSunny } from "react-icons/md";
+import { FaBell } from "react-icons/fa";
 import React from 'react'
 import './Header.css'
-import { CiBellOn } from "react-icons/ci";
-import { BsBrightnessHigh } from "react-icons/bs";
 
 function Header() {
   return (
@@ -20,8 +20,8 @@ function Header() {
             <button>جست و جو</button>
         </div>
 
-        <button className="header-left-icons"><CiBellOn /></button>
-        <button className="header-left-icons"><BsBrightnessHigh /></button>
+        <button className="header-left-icons"><FaBell /></button>
+        <button className="header-left-icons"><MdSunny /></button>
       </div>
 
     </div>
