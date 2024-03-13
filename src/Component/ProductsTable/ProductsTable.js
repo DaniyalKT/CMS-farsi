@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ProductsTable.css";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import DetailsModal from "../DetailsModal/DetailsModal";
 
 function ProductsTable() {
   const [isShowDelete, setIsShowDelete] = useState(false);
@@ -16,6 +17,7 @@ function ProductsTable() {
   
   return (
     <>
+    <DetailsModal />
       <table className="products-table">
         <thead>
           <tr className="products-table-heading-tr">
