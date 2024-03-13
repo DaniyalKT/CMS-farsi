@@ -1,5 +1,18 @@
-.details-modal{
-    padding: 30px;
-    background-color: var(--white);
-    font-size: 1.3rem;
+.details-modal {
+  padding: 30px;
+  background-color: var(--white);
+  font-size: 1.3rem;
+}
+
+.detail-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.details-close-btn {
+  background: #ff4f4f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
 }
