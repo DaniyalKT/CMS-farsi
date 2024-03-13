@@ -20,8 +20,8 @@ export default function Sidebar() {
             صفحه اصلی
           </NavLink>
         </li>
-        <li className="active">
-          <NavLink to="/products">
+        <li>
+          <NavLink to="/products" >
             <MdOutlineProductionQuantityLimits className="sidebar-icone" />
             محصولات
           </NavLink>

@@ -1,10 +1,11 @@
-import React from 'react'
-import './Products.css'
+import React from "react";
+import "./Products.css";
+import Errorbox from "../Errorbox/Errorbox";
 
 function Products() {
-  return (
-    <div>Products</div>
+  return(
+  <Errorbox msg="هیج محصولی یافت نشد" />
   )
 }
 
-export default Products
+export default Products;

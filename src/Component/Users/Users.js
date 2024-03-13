@@ -1,9 +1,13 @@
 import React from 'react'
 import './Users.css'
+import Errorbox from '../Errorbox/Errorbox'
 
 function Users() {
   return (
-    <div>Users</div>
+    <div>
+  <Errorbox msg="هیج کاربری یافت نشد" />
+        
+    </div>
   )
 }
 
