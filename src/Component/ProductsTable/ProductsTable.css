@@ -41,15 +41,42 @@
   object-fit: cover;
 }
 
-.products-table-btn{
-    padding: 8px 20px;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    color: var(--white);
-    background-color: var(--blue);
-    margin-right: 20px;
+.products-table-btn {
+  padding: 8px 20px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  color: var(--white);
+  background-color: var(--blue);
+  margin-right: 20px;
 }
+
+/* start Edit Modal Childs Style */
+ 
+.edit-products-form-group {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px ;
+  background-color: #f4f4f4;
+  padding: 0 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.edit-product-input{
+  outline: none;
+  border: none;
+  background-color: unset;
+  font-size: 1.1rem;
+  width: 100%;
+  padding: 8px 10px;
+  
+}
+/* Finish Edit Modal Childs Style */

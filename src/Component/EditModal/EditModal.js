@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./EditModal.css";
+import { IoClose } from "react-icons/io5";
+
 export default function EditModal({ children, onClose, onSetClose, onSubmit }) {
   return ReactDOM.createPortal(
     <div className={onClose ? "modal-parent active" : "modal-parent"}>
@@ -22,6 +24,7 @@ export default function EditModal({ children, onClose, onSetClose, onSubmit }) {
           </button>
         </div>
       </form>
+   
     </div>,
     document.getElementById("modals-parent")
   );

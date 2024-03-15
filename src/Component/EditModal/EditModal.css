@@ -7,10 +7,9 @@
 .edit-modal-form h1 {
   font-size: 1.4rem;
 }
-.edit-form-btns{
-    display: flex;
-    justify-content: space-evenly; 
-
+.edit-form-btns {
+  display: flex;
+  justify-content: space-evenly;
 }
 .edit-form-submit {
   margin-top: 20px;
@@ -25,13 +24,15 @@
 }
 
 .edit-form-edit {
-    margin-top: 20px;
-    width: 47%;
-    padding: 8px 10px;
-    background-color: #ff4f4f;
-    color: var(--white);
-    font-size: 1.1rem;
-    border: none;
-    outline: none;
-    cursor: pointer;
+  margin-top: 20px;
+  width: 47%;
+  padding: 8px 10px;
+  background-color: #ff4f4f;
+  color: var(--white);
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
+
+ 
