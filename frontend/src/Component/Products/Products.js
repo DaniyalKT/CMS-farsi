@@ -8,7 +8,6 @@ function Products() {
   return (
     <>
       <AddNewProduct />
-      <Errorbox msg="هیج محصولی یافت نشد" />
       <ProductsTable />
     </>
   );
