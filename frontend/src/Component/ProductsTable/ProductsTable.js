@@ -3,13 +3,17 @@ import "./ProductsTable.css";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import DetailsModal from "../DetailsModal/DetailsModal";
 import EditModal from "../EditModal/EditModal";
-import { AiOutlineDollarCircle } from "react-icons/ai";
+import { MdOutlineTitle } from "react-icons/md";
+import { FaDollarSign, FaBoxes, FaImage,FaStar } from "react-icons/fa";
+import { MdOutlinePointOfSale } from "react-icons/md";
+import { IoIosColorPalette } from "react-icons/io";
+
 import Errorbox from "../Errorbox/Errorbox";
 import useApiCrud from "../../Services/useApiCrud";
 import { ToastContainer, toast } from "react-toastify";
 
 function ProductsTable() {
-  const [productData, deleteProduct, deleteMassage] = useApiCrud(
+  const [productData, deleteProduct, updateProduct, insertProduct , isShowMessage] = useApiCrud(
     "http://localhost:8000/api/products/"
   );
 
@@ -18,7 +22,14 @@ function ProductsTable() {
   const [isShowEdit, setIsShowEdit] = useState(false);
   const [productID, setProductID] = useState(null);
   const [mainProductInfos, setMainProductInfos] = useState([]);
-  
+
+  const [productNewTitle, setProductNewTitle] = useState("");
+  const [productNewPrice, setProductNewPrice] = useState("");
+  const [productNewCount, setProductNewCount] = useState("");
+  const [productNewImg, setProductNewImg] = useState("");
+  const [productNewPopularity, setProductNewPopularity] = useState("");
+  const [productNewSale, setProductNewSale] = useState("");
+  const [productNewColors, setProductNewColors] = useState("");
 
   const deleteModalCandelHandler = () => {
     console.log("دیلیت کنسل شد");
@@ -28,19 +39,33 @@ function ProductsTable() {
     console.log("دیلیت تایید شد");
     deleteProduct(productID);
     setIsShowDelete(false);
-    if (deleteMassage == true) {
+    if (isShowMessage == true) {
       toast.success("محصول مورد نظر حذف شد");
-    } else {
-      toast.warning("حذف انجام نشد");
-    }
+    } 
   };
 
   const detailsModalCloseHandler = () => {
     setIsShowDetail(false);
   };
 
-  const updateProductInfos = (event) => {
+  const updateModalSubmitHandler = (event) => {
     event.preventDefault();
+    let newUpdateProduct = {
+      title: productNewTitle,
+      price: productNewPrice,
+      count: productNewCount,
+      img: productNewImg,
+      popularity: productNewPopularity,
+      sale: productNewSale,
+      colors: productNewColors,
+    };
+
+    updateProduct(productID, newUpdateProduct);
+    setIsShowEdit(false);
+    if(isShowMessage == true){
+      toast.success("محصول مورد نظربا موفقیت ویرایش شد");
+      
+    } 
     console.log("محصول ویرایش شد");
   };
 
@@ -90,7 +115,17 @@ function ProductsTable() {
                   </button>
                   <button
                     className="products-table-btn"
-                    onClick={() => setIsShowEdit(true)}
+                    onClick={() => {
+                      setIsShowEdit(true);
+                      setProductID(product.id);
+                      setProductNewTitle(product.title);
+                      setProductNewPrice(product.price);
+                      setProductNewCount(product.count);
+                      setProductNewImg(product.img);
+                      setProductNewPopularity(product.popularity);
+                      setProductNewSale(product.sale);
+                      setProductNewColors(product.colors);
+                    }}
                   >
                     ویرایش
                   </button>
@@ -132,46 +167,90 @@ function ProductsTable() {
       <EditModal
         onClose={isShowEdit}
         onSetClose={setIsShowEdit}
-        onSubmit={updateProductInfos}
+        onSubmit={updateModalSubmitHandler}
       >
         <div className="edit-products-form-group">
           <span>
-            <AiOutlineDollarCircle />
+            <MdOutlineTitle />
           </span>
           <input
             type="text "
             placeholder="عنوان جدید را وارد کنید"
             className="edit-product-input"
+            value={productNewTitle}
+            onChange={(e) => setProductNewTitle(e.target.value)}
           />
         </div>
         <div className="edit-products-form-group">
           <span>
-            <AiOutlineDollarCircle />
+            <FaDollarSign />
           </span>
           <input
             type="text "
-            placeholder="عنوان جدید را وارد کنید"
+            placeholder=" مبلغ محصول را وارد کنید"
             className="edit-product-input"
+            value={productNewPrice}
+            onChange={(e) => setProductNewPrice(e.target.value)}
           />
         </div>
         <div className="edit-products-form-group">
           <span>
-            <AiOutlineDollarCircle />
+            <FaBoxes />
           </span>
           <input
             type="text "
-            placeholder="عنوان جدید را وارد کنید"
+            placeholder="موجودی محصول را وارد کنید"
             className="edit-product-input"
+            value={productNewCount}
+            onChange={(e) => setProductNewCount(e.target.value)}
           />
         </div>
         <div className="edit-products-form-group">
           <span>
-            <AiOutlineDollarCircle />
+            <FaImage />
           </span>
           <input
             type="text "
-            placeholder="عنوان جدید را وارد کنید"
+            placeholder="آدرس کاور محصول را وارد کنید"
             className="edit-product-input"
+            value={productNewImg}
+            onChange={(e) => setProductNewImg(e.target.value)}
+          />
+        </div>
+        <div className="edit-products-form-group">
+          <span>
+            <FaStar />
+          </span>
+          <input
+            type="text "
+            placeholder="میزان محبوبیت محصول را وارد کنید"
+            className="edit-product-input"
+            value={productNewPopularity}
+            onChange={(e) => setProductNewPopularity(e.target.value)}
+          />
+        </div>
+        <div className="edit-products-form-group">
+          <span>
+            <MdOutlinePointOfSale />
+          </span>
+          <input
+            type="text "
+            placeholder="میزان فروش محصول را وارد کنید"
+            className="edit-product-input"
+            value={productNewSale}
+            onChange={(e) => setProductNewSale(e.target.value)}
+          />
+        </div>
+        <div className="edit-products-form-group">
+          <span>
+            <IoIosColorPalette />
+          </span>
+          <input
+            type="text "
+            placeholder="تعداد رنگ بندی را وارد کنید"
+            className="edit-product-input"
+            value={productNewColors}
+            onChange={(e) => setProductNewColors(e.target.value)}
           />
         </div>
       </EditModal>
