@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./custom.css";
 import "./cms.css";
 import { BrowserRouter } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

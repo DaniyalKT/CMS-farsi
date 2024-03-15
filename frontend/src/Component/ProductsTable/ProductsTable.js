@@ -5,12 +5,20 @@ import DetailsModal from "../DetailsModal/DetailsModal";
 import EditModal from "../EditModal/EditModal";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import Errorbox from "../Errorbox/Errorbox";
+import useApiCrud from "../../Services/useApiCrud";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function ProductsTable() {
-  const [allProducts, setAllProducts] = useState([]);
+  const [productData, deleteProduct, deleteMassage] = useApiCrud(
+    "http://localhost:8000/api/products/"
+  );
+  
   const [isShowDelete, setIsShowDelete] = useState(false);
   const [isShowDetail, setIsShowDetail] = useState(false);
   const [isShowEdit, setIsShowEdit] = useState(false);
+  const [productID, setProductID] = useState(null);
+ 
 
   const deleteModalCandelHandler = () => {
     console.log("دیلیت کنسل شد");
@@ -18,7 +26,13 @@ function ProductsTable() {
   };
   const deleteModalSubmitHandler = () => {
     console.log("دیلیت تایید شد");
+    deleteProduct(productID)
     setIsShowDelete(false);
+    if(deleteMassage == true){
+      toast.success("محصول مورد نظر حذف شد")
+    }else{
+      toast.warning('حذف انجام نشد')
+    }
   };
 
   const detailsModalCloseHandler = () => {
@@ -30,15 +44,9 @@ function ProductsTable() {
     console.log("محصول ویرایش شد");
   };
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/products/")
-      .then((response) => response.json())
-      .then((products) => setAllProducts(products));
-  }, []);
-
   return (
     <>
-      {allProducts.length ? (
+      {productData.length ? (
         <table className="products-table">
           <thead>
             <tr className="products-table-heading-tr">
@@ -49,7 +57,7 @@ function ProductsTable() {
             </tr>
           </thead>
           <tbody>
-            {allProducts.map((product) => (
+            {productData.map((product) => (
               <tr key={product.id} className="products-table-tr">
                 <td>
                   <img
@@ -70,7 +78,10 @@ function ProductsTable() {
                   </button>
                   <button
                     className="products-table-btn"
-                    onClick={() => setIsShowDelete(true)}
+                    onClick={() => {
+                      setIsShowDelete(true);
+                      setProductID(product.id);
+                    }}
                   >
                     حذف
                   </button>
@@ -144,6 +155,7 @@ function ProductsTable() {
           />
         </div>
       </EditModal>
+      <ToastContainer position="top-left" style={{fontFamily: 'Lalezar'}}/>
     </>
   );
 }
