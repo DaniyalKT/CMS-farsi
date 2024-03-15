@@ -6,19 +6,19 @@ import EditModal from "../EditModal/EditModal";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import Errorbox from "../Errorbox/Errorbox";
 import useApiCrud from "../../Services/useApiCrud";
-import { ToastContainer, toast } from 'react-toastify';
-
+import { ToastContainer, toast } from "react-toastify";
 
 function ProductsTable() {
   const [productData, deleteProduct, deleteMassage] = useApiCrud(
     "http://localhost:8000/api/products/"
   );
-  
+
   const [isShowDelete, setIsShowDelete] = useState(false);
   const [isShowDetail, setIsShowDetail] = useState(false);
   const [isShowEdit, setIsShowEdit] = useState(false);
   const [productID, setProductID] = useState(null);
- 
+  const [mainProductInfos, setMainProductInfos] = useState([]);
+  
 
   const deleteModalCandelHandler = () => {
     console.log("دیلیت کنسل شد");
@@ -26,12 +26,12 @@ function ProductsTable() {
   };
   const deleteModalSubmitHandler = () => {
     console.log("دیلیت تایید شد");
-    deleteProduct(productID)
+    deleteProduct(productID);
     setIsShowDelete(false);
-    if(deleteMassage == true){
-      toast.success("محصول مورد نظر حذف شد")
-    }else{
-      toast.warning('حذف انجام نشد')
+    if (deleteMassage == true) {
+      toast.success("محصول مورد نظر حذف شد");
+    } else {
+      toast.warning("حذف انجام نشد");
     }
   };
 
@@ -67,12 +67,15 @@ function ProductsTable() {
                   />
                 </td>
                 <td>{product.title}</td>
-                <td>{product.price} تومان</td>
+                <td>{product.price.toLocaleString()} تومان</td>
                 <td>{product.count}</td>
                 <td>
                   <button
                     className="products-table-btn"
-                    onClick={() => setIsShowDetail(true)}
+                    onClick={() => {
+                      setIsShowDetail(true);
+                      setMainProductInfos(product);
+                    }}
                   >
                     جزئیات
                   </button>
@@ -108,7 +111,24 @@ function ProductsTable() {
       <DetailsModal
         isShowDetail={isShowDetail}
         onHide={detailsModalCloseHandler}
-      />
+      >
+        <table className="cms-table">
+          <thead>
+            <tr>
+              <th>محبوبیت</th>
+              <th>فروش</th>
+              <th>رنگ بندی</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>% {mainProductInfos.popularity}</td>
+              <td>{Number(mainProductInfos.sale).toLocaleString()}</td>
+              <td>{mainProductInfos.colors}</td>
+            </tr>
+          </tbody>
+        </table>
+      </DetailsModal>
       <EditModal
         onClose={isShowEdit}
         onSetClose={setIsShowEdit}
@@ -155,7 +175,7 @@ function ProductsTable() {
           />
         </div>
       </EditModal>
-      <ToastContainer position="top-left" style={{fontFamily: 'Lalezar'}}/>
+      <ToastContainer position="top-left" style={{ fontFamily: "Lalezar" }} />
     </>
   );
 }

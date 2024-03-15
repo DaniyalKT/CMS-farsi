@@ -11,10 +11,14 @@ function useApiCrud(url) {
     setGetData(data);
   };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   // Delete
   const deleteData = (deleteUrl) => {
     const fetchUrl = url + deleteUrl;
+
     fetch(fetchUrl, {
       method: "DELETE",
     })
@@ -22,7 +26,7 @@ function useApiCrud(url) {
         if (!response.ok) {
           throw new Error("Failed to delete data");
         }
-        setDeleteMassage(true)
+        setDeleteMassage(true);
         return response.json();
       })
       .then((result) => {
@@ -30,12 +34,10 @@ function useApiCrud(url) {
         fetchData();
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       });
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
+
   return [getData, deleteData, deleteMassage];
 }
 
