@@ -1,0 +1,30 @@
+.text-modal{
+    width: 400px;
+    padding: 25px;
+    background-color: var(--white);
+    line-height: 25px;
+    text-align: justify;
+}
+
+.text-modal-close-btn{
+    width: 100%;
+    padding: 10px 0 ;
+    background-color: var(--blue);
+    color: var(--white);
+    margin-top:20px ;
+    font-size: 1.1rem;
+}
+
+.textarea-edit-style{
+   width: 300px;
+   margin-top: 20px;
+   font-size: .9rem;
+   resize: none;
+   border: none;
+   background-color: var(--white-50);
+   height: 78px;
+   border-radius: 10px;
+   padding: 8px 20px;
+  outline: none;
+  z-index: 3;
+}

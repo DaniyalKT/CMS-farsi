@@ -4,19 +4,19 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import DetailsModal from "../DetailsModal/DetailsModal";
 import EditModal from "../EditModal/EditModal";
 import { MdOutlineTitle } from "react-icons/md";
-import { FaDollarSign, FaBoxes, FaImage,FaStar } from "react-icons/fa";
+import { FaDollarSign, FaBoxes, FaImage, FaStar } from "react-icons/fa";
 import { MdOutlinePointOfSale } from "react-icons/md";
 import { IoIosColorPalette } from "react-icons/io";
 
 import Errorbox from "../Errorbox/Errorbox";
-import useApiCrud from "../../Services/useApiCrud";
 import { ToastContainer, toast } from "react-toastify";
 
-function ProductsTable() {
-  const [productData, deleteProduct, updateProduct, insertProduct , isShowMessage] = useApiCrud(
-    "http://localhost:8000/api/products/"
-  );
-
+function ProductsTable({
+  productData,
+  deleteProduct,
+  updateProduct,
+  isShowMessage,
+}) {
   const [isShowDelete, setIsShowDelete] = useState(false);
   const [isShowDetail, setIsShowDetail] = useState(false);
   const [isShowEdit, setIsShowEdit] = useState(false);
@@ -41,7 +41,7 @@ function ProductsTable() {
     setIsShowDelete(false);
     if (isShowMessage == true) {
       toast.success("محصول مورد نظر حذف شد");
-    } 
+    }
   };
 
   const detailsModalCloseHandler = () => {
@@ -62,10 +62,9 @@ function ProductsTable() {
 
     updateProduct(productID, newUpdateProduct);
     setIsShowEdit(false);
-    if(isShowMessage == true){
+    if (isShowMessage == true) {
       toast.success("محصول مورد نظربا موفقیت ویرایش شد");
-      
-    } 
+    }
     console.log("محصول ویرایش شد");
   };
 
@@ -82,7 +81,7 @@ function ProductsTable() {
             </tr>
           </thead>
           <tbody>
-            {productData.map((product) => (
+            {productData.reverse().map((product) => (
               <tr key={product.id} className="products-table-tr">
                 <td>
                   <img
@@ -139,6 +138,7 @@ function ProductsTable() {
       )}
 
       <DeleteModal
+        title="آیا از حذف اطمینان دارید؟"
         isShowDelete={isShowDelete}
         SubmitAction={deleteModalSubmitHandler}
         CancelAction={deleteModalCandelHandler}
@@ -254,7 +254,7 @@ function ProductsTable() {
           />
         </div>
       </EditModal>
-      <ToastContainer position="top-left" style={{ fontFamily: "Lalezar" }} />
+      <ToastContainer position="top-left" />
     </>
   );
 }

@@ -16,8 +16,9 @@ export default function EditModal({ children, onClose, onSetClose, onSubmit }) {
           </button>
           <button
             className="edit-form-edit"
-            onClick={() => {
+            onClick={(e) => {
               onSetClose(false);
+               e.preventDefault()
             }}
           >
             بستن

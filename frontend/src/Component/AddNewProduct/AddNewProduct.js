@@ -7,18 +7,9 @@ import { FaStar } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoIosColorPalette } from "react-icons/io";
 import { LuTextCursor } from "react-icons/lu";
-import useApiCrud from "../../Services/useApiCrud";
 import { ToastContainer, toast } from "react-toastify";
 
-function AddNewProduct() {
-  const [
-    productData,
-    deleteProduct,
-    updateProduct,
-    insertProduct,
-    isShowMessage,
-  ] = useApiCrud("http://localhost:8000/api/products/");
-
+function AddNewProduct({ isShowMessage, insertProduct }) {
   const [productNewTitle, setProductNewTitle] = useState("");
   const [productNewPrice, setProductNewPrice] = useState("");
   const [productNewCount, setProductNewCount] = useState("");
@@ -41,12 +32,22 @@ function AddNewProduct() {
     };
 
     insertProduct(producntNewInsert);
-    
-    if(isShowMessage == true){ 
-      toast.success('محصول با موفقیت افزوده شد')
+
+    if (isShowMessage == true) {
+      toast.success("محصول با موفقیت افزوده شد");
+      emptyInput()
     }
-    
   };
+
+  function emptyInput() {
+    setProductNewPrice("");
+    setProductNewTitle("");
+    setProductNewCount("");
+    setProductNewImg("");
+    setProductNewPopularity("");
+    setProductNewSale("");
+    setProductNewColors("");
+  }
 
   return (
     <div className="products-main">
@@ -131,7 +132,6 @@ function AddNewProduct() {
         <button className="add-products-submit">ثبت محصول</button>
       </form>
       <ToastContainer position="top-left" style={{ fontFamily: "Lalezar" }} />
-
     </div>
   );
 }

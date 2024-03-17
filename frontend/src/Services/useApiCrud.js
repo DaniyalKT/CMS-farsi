@@ -8,7 +8,7 @@ function useApiCrud(url) {
   const fetchData = async () => {
     const response = await fetch(url);
     const data = await response.json();
-    setGetData(data);
+    setGetData(data.reverse());
   };
 
   useEffect(() => {
@@ -16,8 +16,8 @@ function useApiCrud(url) {
   }, []);
 
   // Delete
-  const deleteData = (deleteUrl) => {
-    const fetchUrl = url + deleteUrl;
+  const deleteData = (ID) => {
+    const fetchUrl = url + ID;
 
     fetch(fetchUrl, {
       method: "DELETE",
@@ -37,8 +37,8 @@ function useApiCrud(url) {
   };
 
   // Put
-  const updateData = (updateUrl, reqBody) => {
-    const fetchUrl = url + updateUrl;
+  const updateData = (ID, reqBody) => {
+    const fetchUrl = url + ID;
 
     fetch(fetchUrl, {
       method: "PUT",
@@ -60,7 +60,10 @@ function useApiCrud(url) {
       });
   };
 
+  //  Post
   const insertData = (reqBody) => {
+
+
     fetch(url, {
       method: "POST",
       headers: {
@@ -79,7 +82,7 @@ function useApiCrud(url) {
       .catch((err) => console.log(err));
   };
 
-  return [getData, deleteData, updateData, insertData, isShowMessage];
+  return [getData, fetchData, deleteData, updateData, insertData, isShowMessage];
 }
 
 export default useApiCrud;
