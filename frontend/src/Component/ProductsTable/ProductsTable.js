@@ -39,9 +39,7 @@ function ProductsTable({
     console.log("دیلیت تایید شد");
     deleteProduct(productID);
     setIsShowDelete(false);
-    if (isShowMessage == true) {
-      toast.success("محصول مورد نظر حذف شد");
-    }
+    toast.success("محصول مورد نظر حذف شد");
   };
 
   const detailsModalCloseHandler = () => {
@@ -62,9 +60,9 @@ function ProductsTable({
 
     updateProduct(productID, newUpdateProduct);
     setIsShowEdit(false);
-    if (isShowMessage == true) {
-      toast.success("محصول مورد نظربا موفقیت ویرایش شد");
-    }
+
+    toast.success("محصول مورد نظربا موفقیت ویرایش شد");
+
     console.log("محصول ویرایش شد");
   };
 

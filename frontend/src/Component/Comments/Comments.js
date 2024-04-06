@@ -7,6 +7,7 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 
 import { ToastContainer, toast } from "react-toastify";
 import EditModal from "../EditModal/EditModal";
+import useAcceptReject from "../../Services/useAcceptReject";
 
 function Comments() {
   const [
@@ -17,6 +18,8 @@ function Comments() {
     insertComment,
     isShowMessage,
   ] = useApiCrud("http://localhost:8000/api/comments/");
+   
+  const isAcceptReject = useAcceptReject('http://localhost:8000/api/comments/')
 
   const [isShowDetail, setIsShowDetail] = useState(false);
   const [isShowDelete, setIsShowDelete] = useState(false);
@@ -34,10 +37,6 @@ function Comments() {
     console.log("کامنت با موفقیت حذف شد");
 
     deleteComment(commentID);
-
-    if (isShowMessage == true) {
-      toast.success("کامنت با موفقیت حذف شد");
-    }
 
     setIsShowDelete(false);
   };
@@ -57,18 +56,8 @@ function Comments() {
 
   const acceptModalSubmitHandler = () => {
     console.log("عملیات تایید کامنت انجام شد");
-
-    fetch(`http://localhost:8000/api/comments/accept/${commentID}`, {
-      method: "POST",
-    })
-      .then((response) => {
-        response.json();
-        fetchData();
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => console.log(err));
+     
+    isAcceptReject('accept', commentID, fetchData)
 
     setIsShowAccept(false);
   };
@@ -80,21 +69,11 @@ function Comments() {
   const rejectModalSubmitHandler = () => {
     setIsShowReject(false);
 
-    fetch(`http://localhost:8000/api/comments/reject/${commentID}`, {
-      method: "POST",
-    })
-      .then((response) => {
-        response.json();
-        fetchData();
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => console.log(err));
-
+    isAcceptReject('reject', commentID, fetchData)
+       
     console.log("عملیات لغو تایید انجام شد");
   };
-
+     
   const rejectModalCancelHandler = () => {
     setIsShowReject(false);
     console.log("عملیات لغو تایید  کنسل شد");
@@ -102,6 +81,9 @@ function Comments() {
 
   return (
     <div className="cms-main">
+      
+      <h1 className="cms-title">کامنت ها</h1>
+
       {getAllComments.length ? (
         <table className="cms-table ">
           <thead>

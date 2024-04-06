@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function useApiCrud(url) {
   let [getData, setGetData] = useState([]);
-  let [isShowMessage, setIsShowMessage] = useState(false);
+  let [isShowMessage, setIsShowMessage] = useState();
 
   // Get
   const fetchData = async () => {
@@ -23,8 +23,8 @@ function useApiCrud(url) {
       method: "DELETE",
     })
       .then((response) => {
-        setIsShowMessage(true);
         response.json();
+
       })
       .then((result) => {
         console.log("data deleted successfuly" + result);
@@ -48,7 +48,6 @@ function useApiCrud(url) {
       body: JSON.stringify(reqBody),
     })
       .then((response) => {
-        setIsShowMessage(true);
         response.json();
       })
       .then((result) => {
@@ -58,12 +57,11 @@ function useApiCrud(url) {
       .catch((err) => {
         console.log(err);
       });
+
   };
 
   //  Post
   const insertData = (reqBody) => {
-
-
     fetch(url, {
       method: "POST",
       headers: {
@@ -72,7 +70,6 @@ function useApiCrud(url) {
       body: JSON.stringify(reqBody),
     })
       .then((response) => {
-        setIsShowMessage(true);
         response.json();
       })
       .then((result) => {
@@ -82,7 +79,14 @@ function useApiCrud(url) {
       .catch((err) => console.log(err));
   };
 
-  return [getData, fetchData, deleteData, updateData, insertData, isShowMessage];
+  return [
+    getData,
+    fetchData,
+    deleteData,
+    updateData,
+    insertData,
+    isShowMessage,
+  ];
 }
 
 export default useApiCrud;
