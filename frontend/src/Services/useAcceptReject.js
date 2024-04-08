@@ -1,8 +1,6 @@
-import React from "react";
-
 export default function useAcceptReject(url) {
   const isAcceptReject = (status, ID, fetchData) => {
-    fetch(`http://localhost:8000/api/comments/${status}/${ID}`, {
+    fetch(`${url}/${status}/${ID}`, {
       method: "POST",
     })
       .then((response) => {
@@ -15,5 +13,18 @@ export default function useAcceptReject(url) {
       .catch((err) => console.log(err));
   };
 
-  return isAcceptReject;
+  const activeHandler = (subUrl, ID, isActive, fetchData) => {
+    fetch(`${url}/${subUrl}/${ID}/${isActive}`, {
+      method: "PUT",
+    })
+      .then((response) => {
+        response.json();
+        fetchData();
+      })
+      .then((result) => {
+        console.log(result);
+      });
+  };
+
+  return [isAcceptReject, activeHandler];
 }

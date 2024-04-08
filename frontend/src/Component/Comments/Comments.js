@@ -19,7 +19,7 @@ function Comments() {
     isShowMessage,
   ] = useApiCrud("http://localhost:8000/api/comments/");
    
-  const isAcceptReject = useAcceptReject('http://localhost:8000/api/comments/')
+  const [isAcceptReject, activeHandler] = useAcceptReject('http://localhost:8000/api/comments')
 
   const [isShowDetail, setIsShowDetail] = useState(false);
   const [isShowDelete, setIsShowDelete] = useState(false);
