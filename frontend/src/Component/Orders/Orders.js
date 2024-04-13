@@ -45,15 +45,15 @@ function Orders() {
   };
 
   const deleteModalSubmitHandler = () => {
-    console.log('عملیات حذف تایید شد')
+    console.log("عملیات حذف تایید شد");
 
-    deleteOrder(orderID)
+    deleteOrder(orderID);
 
-    setIsShowDeleteModal(false)
+    setIsShowDeleteModal(false);
   };
   const deleteModalCancelHandler = () => {
-    console.log('عملیات حذف کنسل شد')
-    setIsShowDeleteModal(false)
+    console.log("عملیات حذف کنسل شد");
+    setIsShowDeleteModal(false);
   };
   return (
     <div className="cms-main">
@@ -81,11 +81,14 @@ function Orders() {
                 <td>{order.hour}</td>
                 <td>{order.count}</td>
                 <td>
-                  <button onClick={() => {
-                    setIsShowDeleteModal(true)
-                    setOrderID(order.id)
-                  }}
-                  >حذف</button>
+                  <button
+                    onClick={() => {
+                      setIsShowDeleteModal(true);
+                      setOrderID(order.id);
+                    }}
+                  >
+                    حذف
+                  </button>
                   <button
                     onClick={() => {
                       setIsShowDetailModal(true);
